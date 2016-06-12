@@ -9,12 +9,13 @@ import {
   View,
   Text
 } from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
 class root extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
+        <Text style={styles.welcome} onPress={()=>Actions.test({title:'123123'})}>
           Welcome to React Native!
         </Text>
         <Text style={styles.instructions}>

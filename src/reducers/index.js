@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
-import userReducer from './user';
+import routes from './routes';
+
 export default combineReducers({
-    userStore:userReducer
+  routes
 })
