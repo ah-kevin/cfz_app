@@ -5,7 +5,8 @@ import {AsyncStorage} from 'react-native';
 import createLogger from 'redux-logger';
 import reducers from '../reducers'
 import devTools from 'remote-redux-devtools';
-import Immutable from 'immutable';
+import Immutable, {Record} from 'immutable';
+import immutableTransform from 'redux-persist-transform-immutable'
 
 var isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
 var logger = createLogger({
@@ -15,6 +16,9 @@ var logger = createLogger({
 });
 
 const middlewares = [ thunk, logger ];
+const MyRecord = Record({
+  foo: 'null'
+}, 'MyRecord') // <- Be sure to add a name field to your record
 let enhancer;
 if (__DEV__) {
   const installDevTools = require('immutable-devtools');
@@ -34,7 +38,7 @@ export default function configureStore (onComplete:?() => void) {
   );
   let opt = {
     storage: AsyncStorage,
-    transform: []
+    transform: [ immutableTransform({ records: [ MyRecord ] }) ]
   }
   persistStore(store, opt, onComplete);
   if (isDebuggingInChrome) {
