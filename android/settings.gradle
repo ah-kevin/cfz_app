@@ -1,0 +1,3 @@
+rootProject.name = 'cfz_app'
+
+include ':app'
