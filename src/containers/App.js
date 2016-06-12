@@ -10,13 +10,14 @@ import {
   Text
 } from 'react-native';
 import {connect} from 'react-redux';
-
-import {Actions} from 'react-native-router-flux';
+import Login from '../login/LoginScreen';
 
 class app extends Component {
   render () {
     const { user }=this.props;
-    console.log(user.get('isLoggedIn'));
+    if (!user.get('isLoggedIn')) {
+      return <Login />
+    }
     return (
       <View style={ styles.container }>
         <Text style={ styles.summary }>App Startup Screen</Text>

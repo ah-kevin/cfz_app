@@ -42,6 +42,7 @@ export default class LoginScreen extends React.Component {
     // call getValue() to get the values of the form
     var value = this.refs.form.getValue();
     if (value) { // if validation fails, value will be null
+      Actions.app();
       console.log(value); // value here is an instance of Person
     }
   }

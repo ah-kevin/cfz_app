@@ -33,16 +33,11 @@ class setup extends Component {
     return (
       <Provider store={this.state.store}>
         <RouterWithRedux hideNavBar={true}>
-          <Scene key="modal" component={Modal}>
-            <Scene key="root">
-              <Scene key="app" component={App} title="Root"/>
-              <Scene key="Login" direction="vertical">
-                <Scene key="loginModal" component={Login} schema="modal" title="Login"/>
-              </Scene>
-            </Scene>
+          <Scene key="root">
+            <Scene key="app" component={App} title="Root"/>
           </Scene>
         </RouterWithRedux>
-      </Provider>
+      </Provider >
     );
   }
 }
