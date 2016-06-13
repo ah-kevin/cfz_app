@@ -15,16 +15,14 @@ import {Actions} from 'react-native-router-flux';
 var Form = t.form.Form;
 // here we are: define your domain model
 var Person = t.struct({
-  帐号: t.maybe(t.String),  // an optional string
-  密码: t.Number, // a required number
-  车次: t.Number,
-  rememberMe: t.Boolean        // a boolean
+  手机号: t.Number,  // an optional string
+  密码: t.Number// a required number
 });
 
 var options = {
   fields: {
-    帐号: {
-      label: '帐号' // <= label for the name field
+    手机号: {
+      label: '手机号' // <= label for the name field
     },
     密码: {
       error: '请输入数字'
@@ -50,15 +48,15 @@ export default class LoginScreen extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        {/* display */}
-        <Form
-          ref="form"
-          type={Person}
-          options={options}
-        />
-        <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>登录</Text>
-        </TouchableHighlight>
+            {/* display */}
+              <Form
+                ref="form"
+                type={Person}
+                options={options}
+              />
+              <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
+                <Text style={styles.buttonText}>登录</Text>
+              </TouchableHighlight>
       </View>
     );
   }

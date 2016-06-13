@@ -12,7 +12,6 @@ import {AsyncStorage} from 'react-native';
  * component
  */
 import App from './containers/App';
-import Login from './login/LoginScreen';
 
 const RouterWithRedux = connect()(Router);
 class setup extends Component {
