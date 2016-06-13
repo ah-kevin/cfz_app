@@ -7,7 +7,8 @@ import React, {
 import {
   StyleSheet,
   View,
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
 import {connect} from 'react-redux';
 import Login from '../login/LoginScreen';
@@ -21,9 +22,22 @@ class Home extends Component {
       return <Login getLogin={getLogin}/>
     }
     return (
-      <View style={ styles.container }>
-        <Text style={ styles.summary }>App Startup Screen</Text>
-        <Text style={ styles.summary }>App Startup Screen</Text>
+      <View style={styles.container}>
+        <View style={styles.item}>
+          <View style={[ styles.center, styles.flex ]}>
+            <Text>1</Text>
+          </View>
+        </View>
+        <View style={styles.item}>
+          <View style={[ styles.center, styles.flex ]}>
+            <Text>1</Text>
+          </View>
+        </View>
+        <View style={styles.item}>
+          <View style={[ styles.center, styles.flex ]}>
+            <Text>1</Text>
+          </View>
+        </View>
       </View>
     );
   }
@@ -31,16 +45,25 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
-    marginTop: 80,
-    padding: 10,
-    backgroundColor:'#fff'
+    marginTop: 64,
+    backgroundColor: '#fff',
+    flex: 1,
+    flexDirection: 'row',
   },
-  summary: {
-    fontFamily: 'BodoniSvtyTwoITCTT-Book',
-    fontSize: 18,
-    fontWeight: 'bold'
+  item: {
+    height: 40,
+    flex: 1
+  },
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
+  flex: {
+    flex: 1
+  },
+  picker: {
+    width: 100,
   }
 });
 
