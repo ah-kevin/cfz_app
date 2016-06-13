@@ -1,4 +1,4 @@
-import {AlertIOS} from 'react-native';
+import {Alert} from 'react-native';
 import {LOGGED_IN, LOGGED_ERROR, LOGGED_DOING, FAIL_LOGIN, RECEIVE_LOGIN, REQUEST_LOGIN} from '../constants/login';
 import config from '../config';
 
@@ -47,6 +47,16 @@ export function getLoing (data) {
     }
     //发送请求
     dispatch(requestLogin());
-
+    return fetch(`${config.server}/loginSale?pass=${data.pwd}&mobile=${data.phoneNo}`, {
+      method: 'post'
+    })
+      .then(res=> {
+        if (res.ok) {
+          return res.json()
+        }
+        Alert.alert(
+          '请求失败'
+        )
+      })
   }
 }
