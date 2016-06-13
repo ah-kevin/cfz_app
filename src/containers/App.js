@@ -11,12 +11,15 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import Login from '../login/LoginScreen';
+import {bindActionCreators} from 'redux';
+import actions from '../actions';
 
 class app extends Component {
   render () {
-    const { user }=this.props;
+    const { user, getLogin }=this.props;
+    // console.log(user);
     if (!user.get('isLoggedIn')) {
-      return <Login />
+      return <Login getLogin={getLogin}/>
     }
     return (
       <View style={ styles.container }>
@@ -43,5 +46,8 @@ const styles = StyleSheet.create({
 export default connect(
   state=>({
     user: state.user
+  }),
+  dispatch=>({
+    getLogin: bindActionCreators(actions.getLogin, dispatch)
   })
 )(app);

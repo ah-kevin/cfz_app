@@ -1,5 +1,4 @@
-import loginActions from './login';
-
-export  default {
+const loginActions=require('./login');
+export default {
   ...loginActions
 }

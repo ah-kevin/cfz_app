@@ -10,7 +10,6 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
 
 var Form = t.form.Form;
 // here we are: define your domain model
@@ -32,18 +31,17 @@ var options = {
   }
 }; // optional rendering options (see documentation)
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
   constructor () {
     super();
     this.onPress = this.onPress.bind(this);
   }
 
   onPress () {
-    // call getValue() to get the values of the form
     var value = this.refs.form.getValue();
+    const { getLogin }=this.props;
     if (value) { // if validation fails, value will be null
-      Actions.app();
-      console.log(value); // value here is an instance of Person
+      getLogin(value)
     }
   }
 
@@ -93,3 +91,5 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+export default LoginScreen;

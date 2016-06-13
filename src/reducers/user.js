@@ -3,19 +3,34 @@
  */
 "use strict";
 import immutable from 'immutable';
-import {LOGGED_IN, LOGGED_DOING, LOGGED_ERROR} from '../constants/login';
+import {REQUEST_LOGIN, RECEIVE_LOGIN, FAIL_LOGIN} from '../constants/login';
 
 const initialState = immutable.fromJS({
   isLoggedIn: false,
   isFetching: false,
-  status: ''
+  error: '',
+  data: {}
 })
 export default function user (state = initialState, action) {
   switch (action.type) {
-    case LOGGED_DOING:
+    case REQUEST_LOGIN:
       return immutable.fromJS({
         isLoggedIn: false,
-        status: 'doing'
+        isFetching: true,
+        error: ''
+      })
+    case FAIL_LOGIN:
+      return immutable.fromJS({
+        isLoggedIn: false,
+        isFetching: false,
+        error: action.payload
+      })
+    case RECEIVE_LOGIN:
+      return immutable.fromJS({
+        isLoggedIn: true,
+        isFetching: false,
+        error: '',
+        data: action.payload
       })
     default:
       return state;

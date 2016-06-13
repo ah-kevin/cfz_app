@@ -1,31 +1,16 @@
 import {Alert} from 'react-native';
-import {LOGGED_IN, LOGGED_ERROR, LOGGED_DOING, FAIL_LOGIN, RECEIVE_LOGIN, REQUEST_LOGIN} from '../constants/login';
+import {FAIL_LOGIN, RECEIVE_LOGIN, REQUEST_LOGIN} from '../constants/login';
 import config from '../config';
 
-export function loggedDoing () {
-  return {
-    type: LOGGED_DOING
-  }
-}
-export function loggederror () {
-  return {
-    type: LOGGED_ERROR
-  }
-}
-
-export function loggedIn () {
-  return {
-    type: LOGGED_IN
-  }
-}
 export function requestLogin () {
   return {
     type: REQUEST_LOGIN
   }
 }
-export function failLogin () {
+export function failLogin (err) {
   return {
-    type: FAIL_LOGIN
+    type: FAIL_LOGIN,
+    payload: err
   }
 }
 export function reveiceLogin (data) {
@@ -38,9 +23,9 @@ export function reveiceLogin (data) {
 /**
  * 登录请求
  */
-export function getLoing (data) {
+export function getLogin (data) {
   return (dispatch, getState)=> {
-    const isFetch = getState().get('isFetching');
+    const isFetch = getState().user.get('isFetching');
     //检测是否在请求
     if (isFetch) {
       return
@@ -56,6 +41,21 @@ export function getLoing (data) {
         }
         Alert.alert(
           '请求失败'
+        )
+      })
+      .then(res=> {
+        if (res.status == 'ok') {
+          dispatch(reveiceLogin(res.data));
+        } else {
+          Alert.alert(
+            '接口请求失败'
+          )
+        }
+      })
+      .catch(err=> {
+        dispatch(failLogin(err));
+        Alert.alert(
+          err
         )
       })
   }
