@@ -14,15 +14,15 @@ import Login from '../login/LoginScreen';
 import {bindActionCreators} from 'redux';
 import actions from '../actions';
 
-class app extends Component {
+class Home extends Component {
   render () {
     const { user, getLogin }=this.props;
-    // console.log(user);
-    if (!user.get('isLoggedIn')) {
+    if (!user.isLoggedIn) {
       return <Login getLogin={getLogin}/>
     }
     return (
       <View style={ styles.container }>
+        <Text style={ styles.summary }>App Startup Screen</Text>
         <Text style={ styles.summary }>App Startup Screen</Text>
       </View>
     );
@@ -50,4 +50,4 @@ export default connect(
   dispatch=>({
     getLogin: bindActionCreators(actions.getLogin, dispatch)
   })
-)(app);
+)(Home);

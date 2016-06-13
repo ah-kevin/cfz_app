@@ -4,20 +4,13 @@ import React, {
 } from 'react';
 import {Provider} from 'react-redux';
 import configureStore from './store/configureStore';
-import {connect} from 'react-redux';
-import {Router, Scene, Modal} from 'react-native-router-flux';
 import {AsyncStorage} from 'react-native';
+import App from './App'
 
-/**
- * component
- */
-import App from './containers/App';
-
-const RouterWithRedux = connect()(Router);
 class setup extends Component {
   constructor () {
     super();
-    AsyncStorage.clear();
+    // AsyncStorage.clear();
     this.state = {
       isLoading: true,
       store: configureStore(()=> {this.setState({ isLoading: false })})
@@ -31,11 +24,7 @@ class setup extends Component {
     }
     return (
       <Provider store={this.state.store}>
-        <RouterWithRedux hideNavBar={true}>
-          <Scene key="root">
-            <Scene key="app" component={App} title="Root"/>
-          </Scene>
-        </RouterWithRedux>
+        <App/>
       </Provider >
     );
   }

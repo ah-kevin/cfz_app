@@ -2,36 +2,24 @@
  *@flow
  */
 "use strict";
-import immutable from 'immutable';
-import {REQUEST_LOGIN, RECEIVE_LOGIN, FAIL_LOGIN} from '../constants/login';
+import {REQUEST_LOGIN, RECEIVE_LOGIN, FAIL_LOGIN, LOGIN_OUT} from '../constants/login';
 
-const initialState = immutable.fromJS({
+const initialState = {
   isLoggedIn: false,
   isFetching: false,
   error: '',
   data: {}
-})
+}
 export default function user (state = initialState, action) {
   switch (action.type) {
+    case LOGIN_OUT:
+      return { ...state, isLoggedIn: false}
     case REQUEST_LOGIN:
-      return immutable.fromJS({
-        isLoggedIn: false,
-        isFetching: true,
-        error: ''
-      })
+      return { ...state, isFetching: true }
     case FAIL_LOGIN:
-      return immutable.fromJS({
-        isLoggedIn: false,
-        isFetching: false,
-        error: action.payload
-      })
+      return { ...state, error: action.payload }
     case RECEIVE_LOGIN:
-      return immutable.fromJS({
-        isLoggedIn: true,
-        isFetching: false,
-        error: '',
-        data: action.payload
-      })
+      return { ...state, isLoggedIn: true, isFetching: false, data: action.payload }
     default:
       return state;
   }

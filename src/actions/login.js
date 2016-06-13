@@ -1,5 +1,5 @@
 import {Alert} from 'react-native';
-import {FAIL_LOGIN, RECEIVE_LOGIN, REQUEST_LOGIN} from '../constants/login';
+import {FAIL_LOGIN, RECEIVE_LOGIN, REQUEST_LOGIN,LOGIN_OUT} from '../constants/login';
 import config from '../config';
 
 export function requestLogin () {
@@ -19,13 +19,18 @@ export function reveiceLogin (data) {
     payload: data
   }
 }
+export function loginOut () {
+  return{
+    type:LOGIN_OUT
+  }
+}
 
 /**
  * 登录请求
  */
 export function getLogin (data) {
   return (dispatch, getState)=> {
-    const isFetch = getState().user.get('isFetching');
+    const isFetch = getState().user.isFetching;
     //检测是否在请求
     if (isFetch) {
       return
