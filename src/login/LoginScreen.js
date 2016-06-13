@@ -66,9 +66,10 @@ class LoginScreen extends React.Component {
 var styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    marginTop: 50,
+    marginTop: 0,
     padding: 20,
     backgroundColor: '#ffffff',
+    flex:1
   },
   title: {
     fontSize: 30,

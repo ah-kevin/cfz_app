@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderBottomWidth: 2,
     marginTop: 80,
-    padding: 10
+    padding: 10,
+    backgroundColor:'#fff'
   },
   summary: {
     fontFamily: 'BodoniSvtyTwoITCTT-Book',
