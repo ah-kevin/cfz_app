@@ -15,16 +15,18 @@ import {Actions} from 'react-native-router-flux';
 var Form = t.form.Form;
 // here we are: define your domain model
 var Person = t.struct({
-  手机号: t.Number,  // an optional string
-  密码: t.Number// a required number
+  phoneNo: t.Number,  // an optional string
+  pwd: t.Number// a required number
 });
 
 var options = {
   fields: {
-    手机号: {
-      label: '手机号' // <= label for the name field
+    phoneNo: {
+      label: '手机号', // <= label for the name field
+      error: '请输入手机号'
     },
-    密码: {
+    pwd: {
+      label: '密码',
       error: '请输入数字'
     }
   }

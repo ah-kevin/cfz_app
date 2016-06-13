@@ -7,6 +7,7 @@ import {LOGGED_IN, LOGGED_DOING, LOGGED_ERROR} from '../constants/login';
 
 const initialState = immutable.fromJS({
   isLoggedIn: false,
+  isFetching: false,
   status: ''
 })
 export default function user (state = initialState, action) {
