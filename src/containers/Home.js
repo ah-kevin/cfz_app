@@ -62,14 +62,7 @@ class Home extends Component {
           </View>
         </View>
         <View style={styles.scrollViewContainer}>
-          <ScrollView
-            ref={(scrollView) => { _scrollView = scrollView; }}
-            automaticallyAdjustContentInsets={false}
-            onScroll={() => { console.log('onScroll!'); }}
-            scrollEventThrottle={200}
-            style={styles.scrollView}>
-            <ListView/>
-          </ScrollView>
+        <ListView />
         </View>
         <View style={styles.tabbar}>
           <Tabs selected={this.state.page} style={{ backgroundColor: 'white' }}
