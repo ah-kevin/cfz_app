@@ -7,7 +7,7 @@ import {
 }   from 'react-native';
 
 var GiftedListView = require('react-native-gifted-listview');
-var ListView = React.createClass({
+class ListView extends React.Component{
   /**
    * Will be called when refreshing
    * Should be replaced by your own logic
@@ -26,15 +26,36 @@ var ListView = React.createClass({
         callback(rows);
       }
     }, 1000); // simulating network fetching
-  },
+  }
+  /**
+   * Render a view when there is no row to display at the first fetch
+   * @param {function} refreshCallback The function to call to refresh the listview
+   */
+  _renderEmptyView(refreshCallback) {
+    return (
+      <View style={styles.defaultView}>
+        <Text style={styles.defaultViewTitle}>
+          Sorry, there is no content to display
+        </Text>
 
+        <TouchableHighlight
+          underlayColor='#c8c7cc'
+          onPress={refreshCallback}
+        >
+          <Text>
+            ↻
+          </Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
   /**
    * When a row is touched
    * @param {object} rowData Row data
    */
   _onPress(rowData) {
     console.log(rowData + ' pressed');
-  },
+  }
 
   /**
    * Render a row
@@ -45,18 +66,18 @@ var ListView = React.createClass({
       <TouchableHighlight
         style={styles.row}
         underlayColor='#c8c7cc'
-        onPress={() => this._onPress(rowData)}
+        onPress={()=>this._onPress(rowData)}
       >
         <Text>{rowData}</Text>
       </TouchableHighlight>
     );
-  },
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <GiftedListView
-          rowView={this._renderRowView}
+          rowView={this._renderRowView.bind(this)}
           onFetch={this._onFetch}
           firstLoader={true} // display a loader for the first fetching
           pagination={true} // enable infinite scrolling using touch to load more
@@ -73,7 +94,7 @@ var ListView = React.createClass({
       </View>
     );
   }
-});
+};
 
 const styles = StyleSheet.create({
   container: {
