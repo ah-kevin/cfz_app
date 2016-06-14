@@ -9,7 +9,8 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  ScrollView
 } from 'react-native';
 import {connect} from 'react-redux';
 import Login from '../login/LoginScreen';
@@ -32,6 +33,7 @@ class Home extends Component {
   }
 
   render () {
+    var _scrollView: ScrollView;
     const { user, getLogin }=this.props;
     if (!user.isLoggedIn) {
       return <Login getLogin={getLogin}/>
@@ -75,7 +77,7 @@ class Home extends Component {
           <View style={styles.pickerContainer}>
             <Picker
               ref={picker => this.picker = picker}
-              style={{ height: 350 }}
+              style={{ height: 200 }}
               showDuration={300}
               pickerData={this.state.pickerData}
               selectedValue={this.state.selectedValue}
@@ -119,7 +121,14 @@ const styles = StyleSheet.create({
     flex: 1
   },
   pickerContainer: {
-    height: Dimensions.get('window').height,
+    // height: Dimensions.get('window').height,
+    position:'absolute',
+    bottom:0,
+  },
+  scrollViewContainer:{
+    backgroundColor:'blue',
+  },
+  scrollView:{
   }
 });
 
