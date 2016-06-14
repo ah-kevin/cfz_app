@@ -8,13 +8,14 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Picker
 } from 'react-native';
 import {connect} from 'react-redux';
 import Login from '../login/LoginScreen';
 import {bindActionCreators} from 'redux';
 import actions from '../actions';
-
+const Item = Picker.Item
 class Home extends Component {
   render () {
     const { user, getLogin }=this.props;
@@ -23,21 +24,34 @@ class Home extends Component {
     }
     return (
       <View style={styles.container}>
-        <View style={styles.item}>
-          <View style={[ styles.center, styles.flex ]}>
-            <Text>1</Text>
+        <View style={styles.header}>
+          <View style={styles.item}>
+            <View style={[ styles.center, styles.flex ]}>
+              <Text>1</Text>
+            </View>
+          </View>
+          <View style={styles.item}>
+            <View style={[ styles.center, styles.flex ]}>
+              <Text>1</Text>
+            </View>
+          </View>
+          <View style={styles.item}>
+            <View style={[ styles.center, styles.flex ]}>
+              <Text>1</Text>
+            </View>
           </View>
         </View>
-        <View style={styles.item}>
-          <View style={[ styles.center, styles.flex ]}>
-            <Text>1</Text>
-          </View>
-        </View>
-        <View style={styles.item}>
-          <View style={[ styles.center, styles.flex ]}>
-            <Text>1</Text>
-          </View>
-        </View>
+            {
+              false ? <View style={styles.pickerContainer}>
+                <Picker
+                  style={styles.picker}
+                  selectedValue={'111'}
+                  onValueChange={()=> {}}>
+                  <Item label="hello" value="key0" style={styles.select}/>
+                  <Item label="world" value="key1" style={styles.select}/>
+                </Picker>
+              </View> : null
+            }
       </View>
     );
   }
@@ -46,8 +60,13 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     marginTop: 64,
-    backgroundColor: '#fff',
     flex: 1,
+    backgroundColor: '#fff'
+  },
+  gray: {
+    backgroundColor: 'rgba(52,52,52,.2)',
+  },
+  header: {
     flexDirection: 'row',
   },
   item: {
@@ -62,8 +81,16 @@ const styles = StyleSheet.create({
   flex: {
     flex: 1
   },
+  pickerContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  select: {
+    alignItems: 'flex-end'
+  },
   picker: {
-    width: 100,
+    backgroundColor: "#fff"
   }
 });
 
