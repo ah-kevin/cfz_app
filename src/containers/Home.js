@@ -66,11 +66,11 @@ class Home extends Component {
         <View style={styles.tabbar}>
           <Tabs selected={this.state.page} style={{ backgroundColor: 'white' }}
                 selectedStyle={{ color: 'red' }} onSelect={el=>this.setState({ page: el.props.name })}>
-            <Text name="first">First</Text>
-            <Text name="second" selectedIconStyle={{ borderTopWidth: 2, borderTopColor: 'red' }}>Second</Text>
-            <Text name="third">Third</Text>
-            <Text name="fourth" selectedStyle={{ color: 'green' }}>Fourth</Text>
-            <Text name="fifth">Fifth</Text>
+            <Text name="first">全部</Text>
+            <Text name="second" selectedIconStyle={{ borderTopWidth: 2, borderTopColor: 'red' }}>正餐</Text>
+            <Text name="third">零食</Text>
+            <Text name="fourth" selectedStyle={{ color: 'green' }}>饮品</Text>
+            <Text name="fifth">休闲</Text>
           </Tabs>
         </View>
         <View style={styles.pickerContainer}>

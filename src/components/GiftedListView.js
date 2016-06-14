@@ -4,11 +4,13 @@ import {
   Text,
   View,
   TouchableHighlight,
-  Platform
+  Platform,
+  Image
 }   from 'react-native';
 
 var GiftedListView = require('react-native-gifted-listview');
 import GiftedSpinner from 'react-native-gifted-spinner';
+import config from '../config';
 
 class ListView extends React.Component {
   /**
@@ -20,7 +22,8 @@ class ListView extends React.Component {
    */
   _onFetch (page = 1, callback, options) {
     setTimeout(() => {
-      var rows = [ 'row ' + ((page - 1) * 3 + 1), 'row ' + ((page - 1) * 3 + 2), 'row ' + ((page - 1) * 3 + 3) ];
+      // var rows = [ 'row ' + ((page - 1) * 3 + 1), 'row ' + ((page - 1) * 3 + 2), 'row ' + ((page - 1) * 3 + 3) ];
+      var rows=['test']
       if (page === 5) {
         callback(rows, {
           allLoaded: true, // the end of the list is reached
@@ -168,7 +171,10 @@ class ListView extends React.Component {
         underlayColor='#c8c7cc'
         onPress={() => this._onPress(rowData)}
       >
-        <Text>{rowData}</Text>
+        <View style={styles.ListContainer}>
+          <Text>{rowData}</Text>
+          <Image source={{uri:`${config.imgUrl}1001.jpg`}} style={{width:40,height:40}}/>
+        </View>
       </TouchableHighlight>
     );
   }
@@ -265,7 +271,7 @@ const styles = StyleSheet.create({
   },
   row: {
     padding: 10,
-    height: 44,
+    height: 80,
   },
   header: {
     backgroundColor: '#50a4ff',
@@ -273,6 +279,12 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: '#fff',
+  },
+  ListContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'blue',
+    alignItems:'center'
   }
 });
 module.exports = ListView;
