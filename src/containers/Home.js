@@ -11,7 +11,6 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   Dimensions,
-  ScrollView
 } from 'react-native';
 import {connect} from 'react-redux';
 import Login from '../login/LoginScreen';

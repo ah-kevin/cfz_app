@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  Platform
 }   from 'react-native';
 
 var GiftedListView = require('react-native-gifted-listview');
@@ -177,8 +178,10 @@ class ListView extends React.Component {
       <View style={styles.container}>
         <GiftedListView
           rowView={this._renderRowView.bind(this)}
+
           onFetch={this._onFetch}
-          withSections={false} // enable sections
+          initialListSize={1} // the maximum number of rows displayable without scrolling (height of the listview / height of row)
+
           firstLoader={true} // display a loader for the first fetching
 
           emptyView={this._renderEmptyView}
@@ -217,6 +220,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFF',
+  },
+  navBar: {
+    height: 64,
+    backgroundColor: '#007aff',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  navBarTitle: {
+    color: '#fff',
+    fontSize: 16,
+    marginTop: 12,
   },
   separator: {
     height: 1,
@@ -259,6 +274,5 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: '#fff',
   }
-
 });
 module.exports = ListView;
