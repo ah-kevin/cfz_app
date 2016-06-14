@@ -9,6 +9,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  TouchableHighlight,
   Dimensions,
   ScrollView
 } from 'react-native';
@@ -18,6 +19,7 @@ import {bindActionCreators} from 'redux';
 import actions from '../actions';
 import Picker from 'react-native-picker';
 import Tabs from 'react-native-tabs';
+import GiftedListView from 'react-native-gifted-listview';
 
 class Home extends Component {
   constructor () {
@@ -26,6 +28,33 @@ class Home extends Component {
       pickerData: [ 1, 2, 3 ],
       selectedValue: [ 1123123123 ]
     };
+  }
+  _onFetch(page = 1, callback, options) {
+    setTimeout(() => {
+      var rows = ['row '+((page - 1) * 3 + 1), 'row '+((page - 1) * 3 + 2), 'row '+((page - 1) * 3 + 3)];
+      if (page === 3) {
+        callback(rows, {
+          allLoaded: true, // the end of the list is reached
+        });
+      } else {
+        callback(rows);
+      }
+    }, 1000); // simulating network fetching
+  }
+  /**
+   * Render a row
+   * @param {object} rowData Row data
+   */
+  _renderRowView(rowData) {
+    return (
+      <TouchableHighlight
+        style={styles.row}
+        underlayColor='#c8c7cc'
+        onPress={() =>alert('123')}
+      >
+        <Text>{rowData}12321</Text>
+      </TouchableHighlight>
+    );
   }
 
   _onPressHandle () {
@@ -66,6 +95,23 @@ class Home extends Component {
             onScroll={() => { console.log('onScroll!'); }}
             scrollEventThrottle={200}
             style={styles.scrollView}>
+            <View style={{flex:1,backgroundColor:'blue'}}>
+              <GiftedListView
+                rowView={this._renderRowView}
+                onFetch={this._onFetch}
+                firstLoader={true} // display a loader for the first fetching
+                pagination={true} // enable infinite scrolling using touch to load more
+                refreshable={true} // enable pull-to-refresh for iOS and touch-to-refresh for Android
+                withSections={false} // enable sections
+                customStyles={{
+                  paginationView: {
+                    backgroundColor: '#eee',
+                  },
+                }}
+
+                refreshableTintColor="blue"
+              />
+            </View>
           </ScrollView>
         </View>
         <View style={styles.tabbar}>
@@ -124,7 +170,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   pickerContainer: {
-    // height: Dimensions.get('window').height,
     position: 'absolute',
     bottom: 0,
   },
@@ -134,7 +179,11 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     backgroundColor: 'yellow',
-  }
+  },
+  row: {
+    padding: 10,
+    height: 44,
+  },
 });
 
 export default connect(
