@@ -9,6 +9,8 @@ import {
 }   from 'react-native';
 
 var GiftedListView = require('react-native-gifted-listview');
+import CheckBox from 'react-native-checkbox';
+
 import GiftedSpinner from 'react-native-gifted-spinner';
 import config from '../config';
 
@@ -23,7 +25,7 @@ class ListView extends React.Component {
   _onFetch (page = 1, callback, options) {
     setTimeout(() => {
       // var rows = [ 'row ' + ((page - 1) * 3 + 1), 'row ' + ((page - 1) * 3 + 2), 'row ' + ((page - 1) * 3 + 3) ];
-      var rows=['test']
+      var rows = [ 'test' ]
       if (page === 5) {
         callback(rows, {
           allLoaded: true, // the end of the list is reached
@@ -172,8 +174,21 @@ class ListView extends React.Component {
         onPress={() => this._onPress(rowData)}
       >
         <View style={styles.ListContainer}>
-          <Text>{rowData}</Text>
-          <Image source={{uri:`${config.imgUrl}1001.jpg`}} style={{width:40,height:40}}/>
+          <CheckBox
+            style={{ flex: 1 }}
+            label=''
+            checked={true}
+            onChange={(checked) => console.log('I am checked', checked)}
+          />
+          <Image source={{ uri: `${config.imgUrl}1001.jpg` }} style={{ width: 80, height: 80, flex: 1 }}/>
+          <Text style={{ flex: 2 }}>{rowData}</Text>
+          <TouchableHighlight style={{ flex: 1 }} onPress={()=>console.log('恢复')}>
+            <Text>恢复售卖</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={{ flex: 1 }}>
+            <Text>停止售卖</Text>
+          </TouchableHighlight>
+
         </View>
       </TouchableHighlight>
     );
@@ -271,7 +286,7 @@ const styles = StyleSheet.create({
   },
   row: {
     padding: 10,
-    height: 80,
+    height: 120,
   },
   header: {
     backgroundColor: '#50a4ff',
@@ -283,8 +298,8 @@ const styles = StyleSheet.create({
   ListContainer: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'blue',
-    alignItems:'center'
+    // backgroundColor: 'blue',
+    alignItems: 'center'
   }
 });
 module.exports = ListView;
