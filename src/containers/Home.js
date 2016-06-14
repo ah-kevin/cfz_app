@@ -33,7 +33,7 @@ class Home extends Component {
   }
 
   render () {
-    var _scrollView: ScrollView;
+    var _scrollView:ScrollView;
     const { user, getLogin }=this.props;
     if (!user.isLoggedIn) {
       return <Login getLogin={getLogin}/>
@@ -59,6 +59,15 @@ class Home extends Component {
             </View>
           </View>
         </View>
+        <View style={styles.scrollViewContainer}>
+          <ScrollView
+            ref={(scrollView) => { _scrollView = scrollView; }}
+            automaticallyAdjustContentInsets={false}
+            onScroll={() => { console.log('onScroll!'); }}
+            scrollEventThrottle={200}
+            style={styles.scrollView}>
+          </ScrollView>
+        </View>
         <View style={styles.tabbar}>
           <Tabs selected={this.state.page} style={{ backgroundColor: 'white' }}
                 selectedStyle={{ color: 'red' }} onSelect={el=>this.setState({ page: el.props.name })}>
@@ -68,26 +77,20 @@ class Home extends Component {
             <Text name="fourth" selectedStyle={{ color: 'green' }}>Fourth</Text>
             <Text name="fifth">Fifth</Text>
           </Tabs>
-          <Text style={styles.welcome}>
-            Welcome to React Native
-          </Text>
-          <Text style={styles.instructions}>
-            Selected page: {this.state.page}
-          </Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              ref={picker => this.picker = picker}
-              style={{ height: 200 }}
-              showDuration={300}
-              pickerData={this.state.pickerData}
-              selectedValue={this.state.selectedValue}
-              onPickerDone={(pickedValue) => {
-                this.setState({
-                  selectedValue: pickedValue,
-                });
-              }}
-            />
-          </View>
+        </View>
+        <View style={styles.pickerContainer}>
+          <Picker
+            ref={picker => this.picker = picker}
+            style={{ height: 200 }}
+            showDuration={300}
+            pickerData={this.state.pickerData}
+            selectedValue={this.state.selectedValue}
+            onPickerDone={(pickedValue) => {
+              this.setState({
+                selectedValue: pickedValue,
+              });
+            }}
+          />
         </View>
 
       </View>
@@ -105,7 +108,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   tabbar: {
-    flex: 3,
+    height: 50,
     backgroundColor: 'red'
   },
   item: {
@@ -122,13 +125,15 @@ const styles = StyleSheet.create({
   },
   pickerContainer: {
     // height: Dimensions.get('window').height,
-    position:'absolute',
-    bottom:0,
+    position: 'absolute',
+    bottom: 0,
   },
-  scrollViewContainer:{
-    backgroundColor:'blue',
+  scrollViewContainer: {
+    backgroundColor: 'blue',
+    flex: 1
   },
-  scrollView:{
+  scrollView: {
+    backgroundColor: 'yellow',
   }
 });
 
