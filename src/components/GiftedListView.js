@@ -55,7 +55,6 @@ var ListView = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.navBar}/>
         <GiftedListView
           rowView={this._renderRowView}
           onFetch={this._onFetch}
@@ -63,12 +62,12 @@ var ListView = React.createClass({
           pagination={true} // enable infinite scrolling using touch to load more
           refreshable={true} // enable pull-to-refresh for iOS and touch-to-refresh for Android
           withSections={false} // enable sections
+          enableEmptySections={true}
           customStyles={{
             paginationView: {
               backgroundColor: '#eee',
             },
           }}
-
           refreshableTintColor="blue"
         />
       </View>
@@ -76,18 +75,14 @@ var ListView = React.createClass({
   }
 });
 
-var styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFF',
-  },
-  navBar: {
-    height: 64,
-    backgroundColor: '#CCC'
   },
   row: {
     padding: 10,
     height: 44,
   },
-};
+});
 module.exports = ListView;
