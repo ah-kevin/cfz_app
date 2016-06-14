@@ -19,7 +19,7 @@ import {bindActionCreators} from 'redux';
 import actions from '../actions';
 import Picker from 'react-native-picker';
 import Tabs from 'react-native-tabs';
-import GiftedListView from 'react-native-gifted-listview';
+import ListView from '../components/GiftedListView';
 
 class Home extends Component {
   constructor () {
@@ -28,33 +28,6 @@ class Home extends Component {
       pickerData: [ 1, 2, 3 ],
       selectedValue: [ 1123123123 ]
     };
-  }
-  _onFetch(page = 1, callback, options) {
-    setTimeout(() => {
-      var rows = ['row '+((page - 1) * 3 + 1), 'row '+((page - 1) * 3 + 2), 'row '+((page - 1) * 3 + 3)];
-      if (page === 3) {
-        callback(rows, {
-          allLoaded: true, // the end of the list is reached
-        });
-      } else {
-        callback(rows);
-      }
-    }, 1000); // simulating network fetching
-  }
-  /**
-   * Render a row
-   * @param {object} rowData Row data
-   */
-  _renderRowView(rowData) {
-    return (
-      <TouchableHighlight
-        style={styles.row}
-        underlayColor='#c8c7cc'
-        onPress={() =>alert('123')}
-      >
-        <Text>{rowData}12321</Text>
-      </TouchableHighlight>
-    );
   }
 
   _onPressHandle () {
@@ -95,23 +68,7 @@ class Home extends Component {
             onScroll={() => { console.log('onScroll!'); }}
             scrollEventThrottle={200}
             style={styles.scrollView}>
-            <View style={{flex:1,backgroundColor:'blue'}}>
-              <GiftedListView
-                rowView={this._renderRowView}
-                onFetch={this._onFetch}
-                firstLoader={true} // display a loader for the first fetching
-                pagination={true} // enable infinite scrolling using touch to load more
-                refreshable={true} // enable pull-to-refresh for iOS and touch-to-refresh for Android
-                withSections={false} // enable sections
-                customStyles={{
-                  paginationView: {
-                    backgroundColor: '#eee',
-                  },
-                }}
-
-                refreshableTintColor="blue"
-              />
-            </View>
+            <ListView/>
           </ScrollView>
         </View>
         <View style={styles.tabbar}>
@@ -138,7 +95,6 @@ class Home extends Component {
             }}
           />
         </View>
-
       </View>
     );
   }
@@ -174,16 +130,11 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   scrollViewContainer: {
-    backgroundColor: 'blue',
     flex: 1
   },
   scrollView: {
-    backgroundColor: 'yellow',
-  },
-  row: {
-    padding: 10,
-    height: 44,
-  },
+    // backgroundColor: 'blue',
+  }
 });
 
 export default connect(

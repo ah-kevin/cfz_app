@@ -9,6 +9,7 @@
     "react": "15.0.2",
     "react-native": "0.26.2",
     "react-native-gifted-listview": "0.0.15",
+    "react-native-gifted-spinner": "0.0.4",
     "react-native-picker": "^3.0.4",
     "react-native-root-toast": "^1.0.3",
     "react-native-router-flux": "^3.26.24",
