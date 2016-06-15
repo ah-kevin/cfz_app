@@ -33,24 +33,22 @@ class Home extends Component {
       actions.getTrainLine(user.data[ 0 ][ 0 ]);
     }
   }
+
   _onPressHandle () {
     this.picker.toggle();
+    this.props.actions.select_station();
   }
 
   render () {
-    const { user, trainLine, tabs, actions }=this.props;
+    const { user, trainLine, tabs, actions, selectState }=this.props;
     const trianName = user.data[ 0 ][ 1 ];
-    const selectValue = {
-      pickerData: [ trianName ],
-      selectedValue: [ trianName ]
-    }
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.item}>
             <View style={[ styles.center, styles.flex ]}>
               <TouchableOpacity onPress={this._onPressHandle.bind(this)}>
-                <Text>{trianName}</Text>
+                <Text>{selectState.selectedValue}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -87,9 +85,10 @@ class Home extends Component {
             ref={picker => this.picker = picker}
             style={{ height: 200 }}
             showDuration={300}
-            pickerData={selectValue.pickerData}
-            selectedValue={selectValue.selectedValue}
+            pickerData={selectState.pickerData}
+            selectedValue={selectState.selectedValue}
             onPickerDone={(pickedValue) => {
+              console.log(pickedValue)
             }}
           />
         </View>
@@ -139,7 +138,8 @@ export default connect(
   state=>({
     user: state.user,
     trainLine: state.trainLine,
-    tabs: state.Home.tabs
+    tabs: state.Home.tabs,
+    selectState: state.Home.selectState
   }),
   dispatch=>({
     actions: bindActionCreators(actions, dispatch)

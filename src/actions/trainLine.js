@@ -23,6 +23,11 @@ export function reviveData (data) {
   }
 }
 
+/**
+ * 获取路局信息
+ * @param data
+ * @returns {function(*, *)}
+ */
 export function getTrainLine (data) {
   return (dispatch, getState)=> {
     const isFetch = getState().trainLine.isFetching;
