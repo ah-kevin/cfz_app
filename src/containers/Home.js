@@ -28,11 +28,11 @@ class Home extends Component {
   componentWillMount () {
     const { user, actions, trainLine }=this.props;
     actions.clean_page();
-    // actions.select_line();
     if (user.hasBureauId && !trainLine.hasData) {
       alert('数据重新获取Home')
       actions.getTrainLine(user.data[ 0 ][ 0 ]);
     }
+    actions.select_station()
   }
 
   pick_station () {
@@ -94,7 +94,7 @@ class Home extends Component {
             pickerData={selectState.pickerData}
             selectedValue={selectState.selectedValue}
             onPickerDone={(pickedValue) => {
-              actions.pick_value(pickedValue)
+            console.log(pickedValue);
             }}
           />
         </View>

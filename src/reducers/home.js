@@ -24,8 +24,8 @@ function tabs (state = initailState, action) {
   }
 }
 const initial_select_state = {
-  pickerData: [],
-  selectedValue: [],
+  pickerData: [1,2,3],
+  selectedValue: [1],
   initStationName:'请选择路局',
   initLineName:'请选择交路',
   initTrainName:'',
@@ -35,7 +35,7 @@ function selectState (state = initial_select_state, action) {
     case PICK_STATION:
       return {...state, pickerData: [ action.payload ], selectedValue: [ action.payload],initStationName:action.payload}
     case PICK_LINE:
-      return {...state, pickerData:action.payload, selectedValue:action.payload[0]}
+      return {...state, pickerData:action.payload, selectedValue:action.payload}
     case PICK_VALUE:
       return {...state,initLineName:action.payload}
     default:

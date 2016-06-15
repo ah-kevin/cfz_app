@@ -68,7 +68,6 @@ export function getLogin (data) {
       .then(res=> {
         if (res.status == 'ok') {
           if (getState().trainLine.hasData) {
-            console.log(getState().user.data[ 0 ][ 0 ]+'..'+res.data[0][0]);
             if (getState().user.data[ 0 ][ 0 ] !== res.data[ 0 ][ 0 ]) {
               dispatch(getTrainLine(res.data[ 0 ][ 0 ]))
               alert('数据重新获取Login')
