@@ -29,13 +29,14 @@ const initial_select_state = {
   initStationName:'请选择路局',
   initLineName:'请选择交路',
   initTrainName:'',
+  select:''
 }
 function selectState (state = initial_select_state, action) {
   switch (action.type){
     case PICK_STATION:
-      return {...state, pickerData: [ action.payload ], selectedValue: [ action.payload],initStationName:action.payload}
+      return {...state, pickerData: [ action.payload ], selectedValue: [ action.payload],initStationName:action.payload,select:'1'}
     case PICK_LINE:
-      return {...state, pickerData:action.payload, selectedValue:action.payload}
+      return {...state, pickerData:action.payload, selectedValue:action.payload[0],select:'2'}
     case PICK_VALUE:
       return {...state,initLineName:action.payload}
     default:

@@ -94,7 +94,9 @@ class Home extends Component {
             pickerData={selectState.pickerData}
             selectedValue={selectState.selectedValue}
             onPickerDone={(pickedValue) => {
-            console.log(pickedValue);
+              if (selectState.select == 2) {
+                actions.pick_value(pickedValue)
+              }
             }}
           />
         </View>
