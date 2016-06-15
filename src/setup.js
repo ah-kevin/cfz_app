@@ -5,12 +5,13 @@ import React, {
 import {Provider} from 'react-redux';
 import configureStore from './store/configureStore';
 import {AsyncStorage} from 'react-native';
+import {persistStore} from 'redux-persist';
+
 import App from './App'
 
 class setup extends Component {
   constructor () {
     super();
-    // AsyncStorage.clear();  
     this.state = {
       isLoading: true,
       store: configureStore(()=> {this.setState({ isLoading: false })})

@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   Dimensions,
+  AsyncStorage
 } from 'react-native';
 import {connect} from 'react-redux';
 import Login from '../login/LoginScreen';
@@ -28,13 +29,11 @@ class Home extends Component {
       selectedValue: [ 1123123123 ]
     };
   }
-
   _onPressHandle () {
     this.picker.toggle();
   }
 
   render () {
-    var _scrollView:ScrollView;
     const { user, getLogin }=this.props;
     if (!user.isLoggedIn) {
       return <Login getLogin={getLogin}/>

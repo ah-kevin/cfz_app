@@ -13,11 +13,11 @@ const initialState = {
 export default function user (state = initialState, action) {
   switch (action.type) {
     case LOGIN_OUT:
-      return { ...state, isLoggedIn: false}
+      return { ...state, isLoggedIn: false, isFetching: false }
     case REQUEST_LOGIN:
       return { ...state, isFetching: true }
     case FAIL_LOGIN:
-      return { ...state, error: action.payload }
+      return { ...state, error: action.payload, isFetching: false }
     case RECEIVE_LOGIN:
       return { ...state, isLoggedIn: true, isFetching: false, data: action.payload }
     default:

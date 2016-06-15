@@ -1,11 +1,17 @@
 import {Alert} from 'react-native';
-import {FAIL_LOGIN, RECEIVE_LOGIN, REQUEST_LOGIN,LOGIN_OUT} from '../constants/login';
+import {FAIL_LOGIN, RECEIVE_LOGIN, REQUEST_LOGIN,LOGIN_OUT,CLEAN_FETHING} from '../constants/login';
 import config from '../config';
 
 export function requestLogin () {
   return {
     type: REQUEST_LOGIN
   }
+}
+export function cleanFetching () {
+  return {
+    type:CLEAN_FETHING
+  }
+
 }
 export function failLogin (err) {
   return {
@@ -52,8 +58,9 @@ export function getLogin (data) {
         if (res.status == 'ok') {
           dispatch(reveiceLogin(res.data));
         } else {
+          dispatch(failLogin('接口错误'));
           Alert.alert(
-            '接口请求失败'
+            '接口请求失败',
           )
         }
       })
