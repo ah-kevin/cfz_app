@@ -14,7 +14,7 @@ import {
   AsyncStorage
 } from 'react-native';
 import {connect} from 'react-redux';
-import Login from '../login/LoginScreen';
+import Login from './LoginScreen';
 import {bindActionCreators} from 'redux';
 import actions from '../actions';
 import Picker from 'react-native-picker';
@@ -35,12 +35,9 @@ class Home extends Component {
   }
 
   render () {
-    const { user, getLogin, trainLine,tabs}=this.props;
+    const { user, getLogin, trainLine, tabs }=this.props;
     console.log(this.state);
     // const trianName = user.data[ 0 ][ 1 ];
-    if (!user.isLoggedIn) {
-      return <Login getLogin={getLogin}/>
-    }
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -135,7 +132,7 @@ export default connect(
   state=>({
     user: state.user,
     trainLine: state.trainLine,
-    tabs:state.Home.tabs
+    tabs: state.Home.tabs
   }),
   dispatch=>({
     getLogin: bindActionCreators(actions.getLogin, dispatch),

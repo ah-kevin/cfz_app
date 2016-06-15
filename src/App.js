@@ -8,15 +8,16 @@ import {bindActionCreators} from 'redux';
 const RouterWithRedux = connect()(Router);
 import actions from './actions';
 import Home from './containers/Home';
+import Login from './containers/LoginScreen'
 class App extends Component {
   render () {
     const { actions } =this.props;
     return (
       <RouterWithRedux hideNavBar={true}>
         <Scene key="root">
+          <Scene key="login" component={Login} initial={true} title="登录" hideNavBar={false} type="replace"/>
           <Scene key="app" component={Home} rightTitle="退出"
-                 onRight={()=> {actions.loginOut()}} title="餐服长后台" hideNavBar={false}
-                 hideTabBar={false}/>
+                 onRight={()=> {actions.getLoingOut()}} title="餐服长后台" hideNavBar={false} hideBackImage={true} onBack={()=>{}}/>
         </Scene>
       </RouterWithRedux>
     );

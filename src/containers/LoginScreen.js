@@ -10,7 +10,11 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {Actions} from 'react-native-router-flux';
 
+import actions from '../actions';
 var Form = t.form.Form;
 // here we are: define your domain model
 var Person = t.struct({
@@ -37,11 +41,17 @@ class LoginScreen extends React.Component {
     this.onPress = this.onPress.bind(this);
   }
 
+  componentWillMount () {
+    if (this.props.isLoggedIn) {
+      Actions.app({type:'replace'});
+    }
+  }
+
   onPress () {
     var value = this.refs.form.getValue();
-    const { getLogin }=this.props;
+    const { actions }=this.props;
     if (value) { // if validation fails, value will be null
-      getLogin(value)
+      actions.getLogin(value)
     }
   }
 
@@ -69,7 +79,7 @@ var styles = StyleSheet.create({
     marginTop: 0,
     padding: 20,
     backgroundColor: '#ffffff',
-    flex:1
+    flex: 1
   },
   title: {
     fontSize: 30,
@@ -93,4 +103,11 @@ var styles = StyleSheet.create({
   }
 });
 
-export default LoginScreen;
+export default connect(
+  state=>({
+    isLoggedIn: state.user.isLoggedIn
+  }),
+  dispatch =>({
+    actions: bindActionCreators(actions, dispatch)
+  })
+)(LoginScreen);

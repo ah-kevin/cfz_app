@@ -1,7 +1,7 @@
 import {Alert} from 'react-native';
 import {FAIL_LOGIN, RECEIVE_LOGIN, REQUEST_LOGIN, LOGIN_OUT, CLEAN_FETHING} from '../constants/login';
 import config from '../config';
-import {getTrainLine} from './trainLine';
+import {Actions} from 'react-native-router-flux';
 
 export function requestLogin () {
   return {
@@ -33,6 +33,15 @@ export function loginOut () {
 }
 
 /**
+ * 退出登录
+ */
+export function getLoingOut () {
+  return (dispatch, getState)=> {
+    dispatch(loginOut())
+    Actions.login();
+  }
+}
+/**
  * 登录请求
  */
 export function getLogin (data) {
@@ -58,6 +67,7 @@ export function getLogin (data) {
       .then(res=> {
         if (res.status == 'ok') {
           dispatch(reveiceLogin(res.data));
+          Actions.app()
         } else {
           dispatch(failLogin('接口错误'));
           Alert.alert(
