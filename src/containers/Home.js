@@ -14,7 +14,6 @@ import {
   AsyncStorage
 } from 'react-native';
 import {connect} from 'react-redux';
-import Login from './LoginScreen';
 import {bindActionCreators} from 'redux';
 import actions from '../actions';
 import Picker from 'react-native-picker';
@@ -30,10 +29,10 @@ class Home extends Component {
     };
   }
 
-  componentDidMount () {
-    const { user, trainLine, tabs }=this.props;
-    if(user.data.hasBureauId){
-      actions.getTrainLine(user.data[0][0]);
+  componentWillMount () {
+    const { user, actions, trainLine }=this.props;
+    if (user.hasBureauId && !trainLine.hasData) {
+      actions.getTrainLine(user.data[ 0 ][ 0 ]);
     }
   }
 
@@ -43,7 +42,7 @@ class Home extends Component {
 
   render () {
     const { user, trainLine, tabs }=this.props;
-    console.log(this.state);
+    // console.log(this.state);
     // const trianName = user.data[ 0 ][ 1 ];
     return (
       <View style={styles.container}>

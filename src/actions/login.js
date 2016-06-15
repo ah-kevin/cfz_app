@@ -2,6 +2,7 @@ import {Alert} from 'react-native';
 import {FAIL_LOGIN, RECEIVE_LOGIN, REQUEST_LOGIN, LOGIN_OUT, CLEAN_FETHING} from '../constants/login';
 import config from '../config';
 import {Actions} from 'react-native-router-flux';
+import {getTrainLine} from './trainLine';
 
 export function requestLogin () {
   return {
@@ -66,6 +67,12 @@ export function getLogin (data) {
       })
       .then(res=> {
         if (res.status == 'ok') {
+          if (getState().trainLine.hasData) {
+            console.log(getState().user.data[ 0 ][ 0 ]+'..'+res.data[0][0]);
+            if (getState().user.data[ 0 ][ 0 ] !== res.data[ 0 ][ 0 ]) {
+              dispatch(getTrainLine(res.data[ 0 ][ 0 ]))
+            }
+          }
           dispatch(reveiceLogin(res.data));
           Actions.app()
         } else {
