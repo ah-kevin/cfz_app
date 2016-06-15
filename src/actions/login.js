@@ -44,7 +44,6 @@ export function getLogin (data) {
     }
     //发送请求
     dispatch(requestLogin());
-    const oldbureau = getState().user.data[ 0 ][ 0 ];
     return fetch(`${config.server}/loginSale?pass=${data.pwd}&mobile=${data.phoneNo}`, {
       method: 'post'
     })
@@ -59,9 +58,6 @@ export function getLogin (data) {
       .then(res=> {
         if (res.status == 'ok') {
           dispatch(reveiceLogin(res.data));
-          if (oldbureau !== res.data[ 0 ][ 0 ]) {
-            dispatch(getTrainLine(res.data[ 0 ][ 0 ]))
-          }
         } else {
           dispatch(failLogin('接口错误'));
           Alert.alert(

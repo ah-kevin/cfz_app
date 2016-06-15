@@ -35,9 +35,9 @@ class Home extends Component {
   }
 
   render () {
-    const { user, getLogin, trainLine }=this.props;
+    const { user, getLogin, trainLine,tabs}=this.props;
     console.log(this.state);
-    const trianName = user.data[ 0 ][ 1 ];
+    // const trianName = user.data[ 0 ][ 1 ];
     if (!user.isLoggedIn) {
       return <Login getLogin={getLogin}/>
     }
@@ -47,7 +47,7 @@ class Home extends Component {
           <View style={styles.item}>
             <View style={[ styles.center, styles.flex ]}>
               <TouchableOpacity onPress={this._onPressHandle.bind(this)}>
-                <Text>{trianName}</Text>
+                <Text>{123}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -134,7 +134,8 @@ const styles = StyleSheet.create({
 export default connect(
   state=>({
     user: state.user,
-    trainLine: state.trainLine
+    trainLine: state.trainLine,
+    tabs:state.Home.tabs
   }),
   dispatch=>({
     getLogin: bindActionCreators(actions.getLogin, dispatch),
