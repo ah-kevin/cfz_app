@@ -14,10 +14,13 @@ class App extends Component {
     const { actions } =this.props;
     return (
       <RouterWithRedux hideNavBar={true}>
-        <Scene key="root">
-          <Scene key="login" component={Login} initial={true} title="登录" hideNavBar={false} type="replace"/>
-          <Scene key="app" component={Home} rightTitle="退出"
-                 onRight={()=> {actions.getLoingOut()}} title="餐服长后台" hideNavBar={false} hideBackImage={true} onBack={()=>{}}/>
+        <Scene key="modal" component={Modal}>
+          <Scene key="root" hideNavBar hideTabBar>
+            <Scene key="login" component={Login} initial={true} title="登录" hideNavBar={false} onBack={()=>{}} hideBackImage={true} duration={0} />
+            <Scene key="app" component={Home} rightTitle="退出"
+                   onRight={()=> {actions.getLoingOut()}} title="餐服长后台" hideNavBar={false} hideBackImage={true}
+                   onBack={()=> {}}/>
+          </Scene>
         </Scene>
       </RouterWithRedux>
     );

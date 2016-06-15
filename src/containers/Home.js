@@ -30,12 +30,19 @@ class Home extends Component {
     };
   }
 
+  componentDidMount () {
+    const { user, trainLine, tabs }=this.props;
+    if(user.data.hasBureauId){
+      actions.getTrainLine(user.data[0][0]);
+    }
+  }
+
   _onPressHandle () {
     this.picker.toggle();
   }
 
   render () {
-    const { user, getLogin, trainLine, tabs }=this.props;
+    const { user, trainLine, tabs }=this.props;
     console.log(this.state);
     // const trianName = user.data[ 0 ][ 1 ];
     return (
@@ -135,7 +142,6 @@ export default connect(
     tabs: state.Home.tabs
   }),
   dispatch=>({
-    getLogin: bindActionCreators(actions.getLogin, dispatch),
     actions: bindActionCreators(actions, dispatch)
   })
 )(Home);

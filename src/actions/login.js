@@ -38,7 +38,7 @@ export function loginOut () {
 export function getLoingOut () {
   return (dispatch, getState)=> {
     dispatch(loginOut())
-    Actions.login();
+    Actions.login()
   }
 }
 /**
