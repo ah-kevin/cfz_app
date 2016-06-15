@@ -34,7 +34,7 @@ class Home extends Component {
     }
   }
 
-  _onPressHandle () {
+  pick_station () {
     this.picker.toggle();
     this.props.actions.select_station();
   }
@@ -47,21 +47,21 @@ class Home extends Component {
         <View style={styles.header}>
           <View style={styles.item}>
             <View style={[ styles.center, styles.flex ]}>
-              <TouchableOpacity onPress={this._onPressHandle.bind(this)}>
+              <TouchableOpacity onPress={()=>this.pick_station()}>
                 <Text>{selectState.selectedValue}</Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.item}>
             <View style={[ styles.center, styles.flex ]}>
-              <TouchableOpacity onPress={this._onPressHandle.bind(this)}>
+              <TouchableOpacity onPress={()=> {}}>
                 <Text>{trianName}</Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.item}>
             <View style={[ styles.center, styles.flex ]}>
-              <TouchableOpacity onPress={this._onPressHandle.bind(this)}>
+              <TouchableOpacity onPress={()=> {}}>
                 <Text>{trianName}</Text>
               </TouchableOpacity>
             </View>
