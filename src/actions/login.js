@@ -1,6 +1,7 @@
 import {Alert} from 'react-native';
-import {FAIL_LOGIN, RECEIVE_LOGIN, REQUEST_LOGIN,LOGIN_OUT,CLEAN_FETHING} from '../constants/login';
+import {FAIL_LOGIN, RECEIVE_LOGIN, REQUEST_LOGIN, LOGIN_OUT, CLEAN_FETHING} from '../constants/login';
 import config from '../config';
+import {getTrainLine} from './trainLine';
 
 export function requestLogin () {
   return {
@@ -9,7 +10,7 @@ export function requestLogin () {
 }
 export function cleanFetching () {
   return {
-    type:CLEAN_FETHING
+    type: CLEAN_FETHING
   }
 
 }
@@ -26,8 +27,8 @@ export function reveiceLogin (data) {
   }
 }
 export function loginOut () {
-  return{
-    type:LOGIN_OUT
+  return {
+    type: LOGIN_OUT
   }
 }
 
@@ -43,6 +44,7 @@ export function getLogin (data) {
     }
     //发送请求
     dispatch(requestLogin());
+    const oldbureau = getState().user.data[ 0 ][ 0 ];
     return fetch(`${config.server}/loginSale?pass=${data.pwd}&mobile=${data.phoneNo}`, {
       method: 'post'
     })
@@ -57,6 +59,9 @@ export function getLogin (data) {
       .then(res=> {
         if (res.status == 'ok') {
           dispatch(reveiceLogin(res.data));
+          if (oldbureau !== res.data[ 0 ][ 0 ]) {
+            dispatch(getTrainLine(res.data[ 0 ][ 0 ]))
+          }
         } else {
           dispatch(failLogin('接口错误'));
           Alert.alert(

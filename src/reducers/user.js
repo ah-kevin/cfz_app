@@ -8,7 +8,8 @@ const initialState = {
   isLoggedIn: false,
   isFetching: false,
   error: '',
-  data: {}
+  data: {},
+  hasBureauId:false
 }
 export default function user (state = initialState, action) {
   switch (action.type) {
@@ -19,7 +20,7 @@ export default function user (state = initialState, action) {
     case FAIL_LOGIN:
       return { ...state, error: action.payload, isFetching: false }
     case RECEIVE_LOGIN:
-      return { ...state, isLoggedIn: true, isFetching: false, data: action.payload }
+      return { ...state, isLoggedIn: true, isFetching: false, data: action.payload,hasBureauId:true}
     default:
       return state;
   }

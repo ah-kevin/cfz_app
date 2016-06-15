@@ -35,6 +35,7 @@ class Home extends Component {
 
   render () {
     const { user, getLogin }=this.props;
+    console.log('重新渲染')
     if (!user.isLoggedIn) {
       return <Login getLogin={getLogin}/>
     }
@@ -60,7 +61,7 @@ class Home extends Component {
           </View>
         </View>
         <View style={styles.scrollViewContainer}>
-        <ListView />
+          <ListView />
         </View>
         <View style={styles.tabbar}>
           <Tabs selected={this.state.page} style={{ backgroundColor: 'white' }}
@@ -133,6 +134,7 @@ export default connect(
     user: state.user
   }),
   dispatch=>({
-    getLogin: bindActionCreators(actions.getLogin, dispatch)
+    getLogin: bindActionCreators(actions.getLogin, dispatch),
+    actions: bindActionCreators(actions, dispatch)
   })
 )(Home);
