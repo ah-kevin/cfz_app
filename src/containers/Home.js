@@ -29,13 +29,15 @@ class Home extends Component {
       selectedValue: [ 1123123123 ]
     };
   }
+
   _onPressHandle () {
     this.picker.toggle();
   }
 
   render () {
-    const { user, getLogin }=this.props;
-    console.log('重新渲染')
+    const { user, getLogin, trainLine }=this.props;
+    console.log(this.state);
+    const trianName = user.data[ 0 ][ 1 ];
     if (!user.isLoggedIn) {
       return <Login getLogin={getLogin}/>
     }
@@ -45,7 +47,7 @@ class Home extends Component {
           <View style={styles.item}>
             <View style={[ styles.center, styles.flex ]}>
               <TouchableOpacity onPress={this._onPressHandle.bind(this)}>
-                <Text>{this.state.selectedValue}</Text>
+                <Text>{trianName}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -131,7 +133,8 @@ const styles = StyleSheet.create({
 
 export default connect(
   state=>({
-    user: state.user
+    user: state.user,
+    trainLine: state.trainLine
   }),
   dispatch=>({
     getLogin: bindActionCreators(actions.getLogin, dispatch),
