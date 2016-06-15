@@ -28,6 +28,7 @@ class Home extends Component {
   componentWillMount () {
     const { user, actions, trainLine }=this.props;
     actions.clean_page();
+    // actions.select_line();
     if (user.hasBureauId && !trainLine.hasData) {
       alert('数据重新获取Home')
       actions.getTrainLine(user.data[ 0 ][ 0 ]);
@@ -39,6 +40,11 @@ class Home extends Component {
     this.props.actions.select_station();
   }
 
+  pick_line () {
+    this.picker.toggle();
+    this.props.actions.select_line();
+  }
+
   render () {
     const { user, trainLine, tabs, actions, selectState }=this.props;
     const trianName = user.data[ 0 ][ 1 ];
@@ -48,21 +54,21 @@ class Home extends Component {
           <View style={styles.item}>
             <View style={[ styles.center, styles.flex ]}>
               <TouchableOpacity onPress={()=>this.pick_station()}>
-                <Text>{selectState.selectedValue}</Text>
+                <Text>{selectState.initStationName}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.item}>
+            <View style={[ styles.center, styles.flex ]}>
+              <TouchableOpacity onPress={()=> this.pick_line()}>
+                <Text>{selectState.initLineName}</Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.item}>
             <View style={[ styles.center, styles.flex ]}>
               <TouchableOpacity onPress={()=> {}}>
-                <Text>{trianName}</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.item}>
-            <View style={[ styles.center, styles.flex ]}>
-              <TouchableOpacity onPress={()=> {}}>
-                <Text>{trianName}</Text>
+                <Text>33333</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -88,7 +94,7 @@ class Home extends Component {
             pickerData={selectState.pickerData}
             selectedValue={selectState.selectedValue}
             onPickerDone={(pickedValue) => {
-              console.log(pickedValue)
+              actions.pick_value(pickedValue)
             }}
           />
         </View>

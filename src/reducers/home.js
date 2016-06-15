@@ -2,7 +2,7 @@
  * Created by dg_lennon on 16/6/15.
  */
 import {CHANGE_PAGE, CLEAN_PAGE} from '../constants/Home';
-import {PICK_LINE, PICK_STATION, PICK_TRAINO} from '../constants/TrainLine';
+import {PICK_LINE, PICK_STATION, PICK_TRAINO,PICK_VALUE} from '../constants/TrainLine';
 
 import {combineReducers} from 'redux';
 
@@ -25,16 +25,23 @@ function tabs (state = initailState, action) {
 }
 const initial_select_state = {
   pickerData: [],
-  selectedValue: []
+  selectedValue: [],
+  initStationName:'请选择路局',
+  initLineName:'请选择交路',
+  initTrainName:'',
 }
 function selectState (state = initial_select_state, action) {
-  if (action.type == PICK_STATION) {
-    return {
-      pickerData: [ action.payload ],
-      selectedValue: [ action.payload ]
-    }
+  switch (action.type){
+    case PICK_STATION:
+      return {...state, pickerData: [ action.payload ], selectedValue: [ action.payload],initStationName:action.payload}
+    case PICK_LINE:
+      return {...state, pickerData:action.payload, selectedValue:action.payload[0]}
+    case PICK_VALUE:
+      return {...state,initLineName:action.payload}
+    default:
+      return state
   }
-  return state
+
 }
 export default combineReducers({
   tabs,

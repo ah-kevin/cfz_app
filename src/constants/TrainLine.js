@@ -5,3 +5,4 @@ export const FAIL_TRAINLINE = 'FAIL_TRAINLINE';
 export const PICK_STATION='PICK_STATION';
 export const PICK_LINE='PICK_LINE';
 export const PICK_TRAINO='PICK_TRAINO';
+export const PICK_VALUE='PICK_VALUE';
