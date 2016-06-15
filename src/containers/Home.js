@@ -23,45 +23,49 @@ import ListView from '../components/GiftedListView';
 class Home extends Component {
   constructor () {
     super();
-    this.state = {
-      pickerData: [ 1, 2, 3 ],
-      selectedValue: [ 1123123123 ]
-    };
   }
 
   componentWillMount () {
     const { user, actions, trainLine }=this.props;
+    actions.clean_page();
     if (user.hasBureauId && !trainLine.hasData) {
+      alert('数据重新获取Home')
       actions.getTrainLine(user.data[ 0 ][ 0 ]);
     }
   }
-
   _onPressHandle () {
     this.picker.toggle();
   }
 
   render () {
-    const { user, trainLine, tabs }=this.props;
-    // console.log(this.state);
-    // const trianName = user.data[ 0 ][ 1 ];
+    const { user, trainLine, tabs, actions }=this.props;
+    const trianName = user.data[ 0 ][ 1 ];
+    const selectValue = {
+      pickerData: [ trianName ],
+      selectedValue: [ trianName ]
+    }
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.item}>
             <View style={[ styles.center, styles.flex ]}>
               <TouchableOpacity onPress={this._onPressHandle.bind(this)}>
-                <Text>{123}</Text>
+                <Text>{trianName}</Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.item}>
             <View style={[ styles.center, styles.flex ]}>
-              <Text>1</Text>
+              <TouchableOpacity onPress={this._onPressHandle.bind(this)}>
+                <Text>{trianName}</Text>
+              </TouchableOpacity>
             </View>
           </View>
           <View style={styles.item}>
             <View style={[ styles.center, styles.flex ]}>
-              <Text>1</Text>
+              <TouchableOpacity onPress={this._onPressHandle.bind(this)}>
+                <Text>{trianName}</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -69,8 +73,8 @@ class Home extends Component {
           <ListView />
         </View>
         <View style={styles.tabbar}>
-          <Tabs selected={this.state.page} style={{ backgroundColor: 'white' }}
-                selectedStyle={{ color: 'red' }} onSelect={el=>this.setState({ page: el.props.name })}>
+          <Tabs selected={tabs.page} style={{ backgroundColor: 'white' }}
+                selectedStyle={{ color: 'red' }} onSelect={el=>actions.change_page(el.props.name)}>
             <Text name="first">全部</Text>
             <Text name="second" selectedIconStyle={{ borderTopWidth: 2, borderTopColor: 'red' }}>正餐</Text>
             <Text name="third">零食</Text>
@@ -83,12 +87,9 @@ class Home extends Component {
             ref={picker => this.picker = picker}
             style={{ height: 200 }}
             showDuration={300}
-            pickerData={this.state.pickerData}
-            selectedValue={this.state.selectedValue}
+            pickerData={selectValue.pickerData}
+            selectedValue={selectValue.selectedValue}
             onPickerDone={(pickedValue) => {
-              this.setState({
-                selectedValue: pickedValue,
-              });
             }}
           />
         </View>

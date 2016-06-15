@@ -1,7 +1,7 @@
 /**
  * Created by dg_lennon on 16/6/15.
  */
-import {CHANGE_PAGE} from '../constants/Home';
+import {CHANGE_PAGE,CLEAN_PAGE} from '../constants/Home';
 import {combineReducers} from 'redux';
 
 const initailState={
@@ -12,6 +12,10 @@ function tabs (state =initailState, action) {
     case CHANGE_PAGE:
       return {
         page: action.payload
+      }
+    case CLEAN_PAGE:
+      return{
+        page:''
       }
     default:
       return state
