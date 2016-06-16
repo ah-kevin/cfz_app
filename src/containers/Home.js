@@ -44,7 +44,9 @@ class Home extends Component {
     this.picker.toggle();
     this.props.actions.select_line();
   }
-
+  pick_train(){
+    this.props.selectState.hasTrainData?this.picker.toggle():null;
+  }
   render () {
     const { user, trainLine, tabs, actions, selectState }=this.props;
     const trianName = user.data[ 0 ][ 1 ];
@@ -67,8 +69,8 @@ class Home extends Component {
           </View>
           <View style={styles.item}>
             <View style={[ styles.center, styles.flex ]}>
-              <TouchableOpacity onPress={()=> {}}>
-                <Text>33333</Text>
+              <TouchableOpacity onPress={()=>this.pick_train()}>
+                <Text>{selectState.initTrainName}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -96,6 +98,10 @@ class Home extends Component {
             onPickerDone={(pickedValue) => {
               if (selectState.select == 2) {
                 actions.pick_value(pickedValue)
+                actions.select_train(pickedValue)
+              }
+              if(selectState.select == 3){
+                actions.pick_train_value(pickedValue)
               }
             }}
           />

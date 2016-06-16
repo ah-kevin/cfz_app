@@ -4,7 +4,7 @@
 import {FAIL_TRAINLINE, RECEIVE_TRAINLINE, REQUEST_TRAINLINE} from '../constants/TrainLine';
 import config from '../config';
 import {Alert} from 'react-native';
-import {select_line,select_station} from './home';
+import {select_line, select_station} from './home';
 
 export function request_trainLine () {
   return {
@@ -55,10 +55,6 @@ export function getTrainLine (data) {
           )
         }
       })
-      // .then(()=>{
-      //   dispatch(select_line());
-      //   dispatch(select_station());
-      // })
       .catch(err=> {
         dispatch(faliData(err));
         Alert.alert(

@@ -1,5 +1,5 @@
 import {CHANGE_PAGE, CLEAN_PAGE} from '../constants/Home';
-import {PICK_LINE, PICK_STATION, PICK_TRAINO,PICK_VALUE} from '../constants/TrainLine';
+import {PICK_LINE, PICK_STATION, PICK_TRAINO, PICK_VALUE,PICK_TRAIN_VALUE} from '../constants/TrainLine';
 
 export function change_page (name) {
   return {
@@ -29,10 +29,22 @@ export function pick_line (data) {
     payload: data
   }
 }
+export function pick_train (data) {
+  return {
+    type: PICK_TRAINO,
+    payload: data
+  }
+}
 export function pick_value (value) {
-  return{
-    type:PICK_VALUE,
-    payload:value
+  return {
+    type: PICK_VALUE,
+    payload: value
+  }
+}
+export function pick_train_value (value) {
+  return {
+    type: PICK_TRAIN_VALUE,
+    payload: value
   }
 }
 export function select_station () {
@@ -48,5 +60,16 @@ export function select_line () {
       return data.line_no
     })
     dispatch(pick_line(Line_List))
+  }
+}
+
+export function select_train (lineNo) {
+  return (dispatch, getStore)=> {
+    const LineData = getStore().trainLine.data;
+    const Train_List =LineData.filter((data)=>{
+     return data.line_no==lineNo
+    })
+    const trainNo_List = Train_List[0].trains.map((data)=>data.train_no);
+    dispatch(pick_train(trainNo_List))
   }
 }
