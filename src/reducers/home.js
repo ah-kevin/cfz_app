@@ -37,7 +37,7 @@ function selectState (state = initial_select_state, action) {
     case PICK_STATION:
       return {...state, pickerData: [ action.payload ], selectedValue: [ action.payload],initStationName:action.payload,select:'1'}
     case PICK_LINE:
-      return {...state, pickerData:action.payload, selectedValue:action.payload[0],select:'2'}
+      return {...state, pickerData:action.payload, selectedValue:action.payload[0],select:'2',hasTrainData:false,initTrainName:'请选择车次'}
     case PICK_VALUE:
       return {...state,initLineName:action.payload}
     case PICK_TRAIN_VALUE:

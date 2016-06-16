@@ -11,7 +11,7 @@ import App from './App'
 class setup extends Component {
   constructor () {
     super();
-    AsyncStorage.clear();
+    // AsyncStorage.clear();
     this.state = {
       isLoading: true,
       store: configureStore(()=> {this.setState({ isLoading: false })})
