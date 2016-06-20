@@ -6,14 +6,21 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "immutable": "^3.8.1",
     "react": "15.0.2",
     "react-native": "0.26.2",
+    "react-native-checkbox": "^1.0.13",
+    "react-native-gifted-listview": "0.0.15",
+    "react-native-gifted-spinner": "0.0.4",
+    "react-native-picker": "^3.0.4",
+    "react-native-root-toast": "^1.0.3",
+    "react-native-router-flux": "^3.26.24",
+    "react-native-tabs": "^1.0.7",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-persist": "^3.2.2",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "tcomb-form-native": "^0.5.1"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",
@@ -23,7 +30,6 @@
     "babel-preset-react-native": "^1.9.0",
     "eslint": "^2.11.1",
     "eslint-plugin-react": "^5.1.1",
-    "immutable-devtools": "0.0.7",
     "remote-redux-devtools": "^0.3.3"
   }
 }

@@ -5,7 +5,6 @@ import {AsyncStorage} from 'react-native';
 import createLogger from 'redux-logger';
 import reducers from '../reducers'
 import devTools from 'remote-redux-devtools';
-import Immutable from 'immutable';
 
 var isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
 var logger = createLogger({
@@ -15,10 +14,9 @@ var logger = createLogger({
 });
 
 const middlewares = [ thunk, logger ];
+
 let enhancer;
 if (__DEV__) {
-  const installDevTools = require('immutable-devtools');
-  installDevTools(Immutable);
   enhancer = compose(
     applyMiddleware(...middlewares),
     devTools()
@@ -26,7 +24,7 @@ if (__DEV__) {
 } else {
   enhancer = applyMiddleware(...middlewares);
 }
-export default function configureStore (onComplete:?() => void) {
+export default function configureStore (onComplete) {
   const store = createStore(
     reducers,
     enhancer,

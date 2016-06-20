@@ -1,5 +1,12 @@
 import {combineReducers} from 'redux';
-import userReducer from './user';
+import routes from './routes';
+import user from './user';
+import trainLine from './tainLine';
+import Home from './home';
+
 export default combineReducers({
-    userStore:userReducer
+  routes,
+  user,
+  trainLine,
+  Home
 })
